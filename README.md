@@ -17,7 +17,7 @@ from openmeteo import weather
 await weather.today("Dresden")
 ```
 
-**Status:** 🚧 Pre-alpha. Design in progress, not yet functional.
+**Status:** 🚧 Planning — no code yet, just reserving the name and building the foundation. Track progress toward v0.1.0 in the [CHANGELOG](CHANGELOG.md).
 
 ## Planned features
 
