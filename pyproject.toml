@@ -1,0 +1,137 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "open-meteo-client"
+dynamic = ["version"]
+description = "Lightweight async Python client for the Open-Meteo weather API"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+requires-python = ">=3.11"
+authors = [
+    { name = "Jakob Heine", email = "me@jakobheine.de" },
+]
+keywords = ["weather", "open-meteo", "meteo", "forecast", "async", "client", "api"]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Framework :: AsyncIO",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Atmospheric Science",
+    "Typing :: Typed",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "pytest-asyncio>=0.23",
+    "pytest-cov>=5",
+    "ruff>=0.6",
+    "mypy>=1.11",
+]
+
+[project.urls]
+Homepage = "https://github.com/jakobheine/open-meteo-client"
+Repository = "https://github.com/jakobheine/open-meteo-client"
+Issues = "https://github.com/jakobheine/open-meteo-client/issues"
+"Author website" = "https://jakobheine.de/"
+
+[tool.hatch.version]
+path = "src/openmeteo/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/openmeteo"]
+
+# ---------- Ruff (lint + format) — maximum strict ----------
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+# Start with every rule, then turn off what we don't want.
+select = ["ALL"]
+ignore = [
+    # Docstring style picks — pick one convention
+    "D203",    # 1 blank line before class docstring (conflicts with D211)
+    "D213",    # multiline summary on 2nd line (conflicts with D212)
+
+    # Formatter conflicts
+    "COM812",  # missing trailing comma (handled by formatter)
+    "ISC001",  # implicit string concat (handled by formatter)
+
+    # Too opinionated / annoying during development
+    "FIX",     # flags any TODO/FIXME — we WANT TODOs during dev
+    "TD",      # todo comment formatting — overkill
+    "ERA",     # eradicate commented-out code — too eager
+    "CPY",     # require copyright header in every file — overkill for small lib
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = [
+    "D",       # docstrings not required in tests
+    "S101",    # `assert` is fine in tests
+    "PLR2004", # magic number comparisons OK in tests
+    "ANN",     # tests don't need full type annotations
+    "INP001",  # tests don't need __init__.py to be a proper package
+]
+"scripts/**/*.py" = [
+    "T201",    # print() is fine in scripts
+    "INP001",  # scripts don't need __init__.py
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+# ---------- Mypy — maximum strict ----------
+
+[tool.mypy]
+python_version = "3.11"
+
+# Maximum strictness
+strict = true
+warn_unreachable = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_return_any = true
+strict_equality = true
+extra_checks = true
+disallow_any_generics = true
+disallow_subclassing_any = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+
+# Avoid the most painful flag (can turn on later if we want more pain):
+# disallow_any_expr = true  # forbids Any anywhere; fights with pydantic/httpx
+
+[[tool.mypy.overrides]]
+module = ["tests.*"]
+disallow_untyped_defs = false  # tests can have untyped fixtures
+
+# ---------- Pytest ----------
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "-ra",
+]
