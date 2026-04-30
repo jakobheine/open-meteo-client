@@ -1,0 +1,30 @@
+{
+  "projectName": "open-meteo-client",
+  "projectOwner": "jakobheine",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "commitType": "docs",
+  "contributors": [
+    {
+      "login": "jakobheine",
+      "name": "Jakob Heine",
+      "avatar_url": "https://avatars.githubusercontent.com/jakobheine",
+      "profile": "https://jakobheine.de/",
+      "contributions": [
+        "code",
+        "doc",
+        "design",
+        "infra",
+        "maintenance",
+        "test"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}

@@ -5,6 +5,9 @@
 [![Python versions](https://img.shields.io/pypi/pyversions/open-meteo-client.svg)](https://pypi.org/project/open-meteo-client/)
 [![License: Apache 2.0](https://img.shields.io/pypi/l/open-meteo-client.svg)](https://github.com/jakobheine/open-meteo-client/blob/main/LICENSE)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A lightweight, async Python client for the [Open-Meteo](https://open-meteo.com) weather API — with high-level helpers that fit on a sticky note.
 
@@ -34,6 +37,30 @@ pip install open-meteo-client
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) for release notes.
+
+## Contributing
+
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for setup instructions and guidelines.
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://jakobheine.de/"><img src="https://avatars.githubusercontent.com/jakobheine?v=4?s=100" width="100px;" alt="Jakob Heine"/><br /><sub><b>Jakob Heine</b></sub></a><br /><a href="https://github.com/jakobheine/open-meteo-client/commits?author=jakobheine" title="Code">💻</a> <a href="https://github.com/jakobheine/open-meteo-client/commits?author=jakobheine" title="Documentation">📖</a> <a href="#design-jakobheine" title="Design">🎨</a> <a href="#infra-jakobheine" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-jakobheine" title="Maintenance">🚧</a> <a href="https://github.com/jakobheine/open-meteo-client/commits?author=jakobheine" title="Tests">⚠️</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
 ## License
 
