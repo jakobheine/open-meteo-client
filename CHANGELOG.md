@@ -7,9 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.3] - 2026-04-30
+
 ### Added
-- Project badges (CI, PyPI version, Python versions, License, Ruff) in `README.md`.
+- README badges: CI, PyPI version, supported Python versions, license,
+  Ruff, and all-contributors count.
 - `CHANGELOG.md` following the Keep a Changelog convention.
+- `CONTRIBUTING.md` with dev setup (uv + just), style guidelines, and
+  commit message conventions.
+- `.all-contributorsrc` + Contributors section in README following the
+  [all-contributors](https://github.com/all-contributors/all-contributors)
+  specification.
+- Dependabot configuration (`.github/dependabot.yml`) for weekly Python
+  and GitHub Actions dependency updates.
+- Enabled GitHub Discussions for the repository.
+
+### Changed
+- Aligned project status between `pyproject.toml` and `README.md`: both
+  now say "Planning". (The README previously said "Pre-alpha" while
+  the classifier was still "1 - Planning".)
 
 ## [0.0.2] - 2026-04-30
 
@@ -34,6 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `ci.yml` — lint/format/types + pytest matrix on Python 3.11–3.14
   - `publish.yml` — build and upload to PyPI via Trusted Publishing
 
-[Unreleased]: https://github.com/jakobheine/open-meteo-client/compare/v0.0.2...HEAD
+[Unreleased]: https://github.com/jakobheine/open-meteo-client/compare/v0.0.3...HEAD
+[0.0.3]: https://github.com/jakobheine/open-meteo-client/releases/tag/v0.0.3
 [0.0.2]: https://github.com/jakobheine/open-meteo-client/releases/tag/v0.0.2
 [0.0.1]: https://github.com/jakobheine/open-meteo-client/releases/tag/v0.0.1

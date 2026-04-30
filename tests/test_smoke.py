@@ -11,4 +11,4 @@ def test_import() -> None:
 def test_version() -> None:
     """The package should expose a version string."""
     assert isinstance(openmeteo.__version__, str)
-    assert openmeteo.__version__ == "0.0.2"
+    assert openmeteo.__version__ == "0.0.3"
