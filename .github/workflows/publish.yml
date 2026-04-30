@@ -1,0 +1,68 @@
+name: Publish to PyPI
+
+# Triggered when you create a GitHub Release (which creates a tag).
+# Flow:
+#   1. `git tag v0.1.0 && git push --tags`
+#   2. Go to GitHub → Releases → "Draft a new release" → select tag → Publish
+#   3. This workflow runs and uploads to PyPI via Trusted Publishing.
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    name: Build distribution
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Set up Python 3.14
+        run: uv python install 3.14
+
+      - name: Build wheel + sdist
+        run: uv build --python 3.14
+
+      - name: Verify build metadata
+        run: |
+          ls -la dist/
+          python -m tarfile --list dist/*.tar.gz | head -20
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    name: Publish to PyPI
+    needs: build
+    runs-on: ubuntu-latest
+
+    # GitHub Environment — provides an approval gate (optional, recommended).
+    # Configure protection rules at:
+    # Settings → Environments → pypi → Required reviewers
+    environment:
+      name: pypi
+      url: https://pypi.org/project/open-meteo-client/
+
+    # These permissions are required for Trusted Publishing via OIDC.
+    # `id-token: write` lets the action request an OIDC token from GitHub that
+    # PyPI validates to prove "this workflow from this repo is allowed to publish".
+    permissions:
+      id-token: write
+
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        # No credentials required — Trusted Publishing handles auth via OIDC.
