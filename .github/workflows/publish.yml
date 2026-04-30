@@ -20,9 +20,7 @@ jobs:
         uses: astral-sh/setup-uv@v6
         with:
           enable-cache: true
-
-      - name: Set up Python 3.14
-        run: uv python install 3.14
+          python-version: "3.14"
 
       - name: Build wheel + sdist
         run: uv build --python 3.14
