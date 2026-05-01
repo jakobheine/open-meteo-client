@@ -3,6 +3,7 @@
 [![CI](https://github.com/jakobheine/open-meteo-client/actions/workflows/ci.yml/badge.svg)](https://github.com/jakobheine/open-meteo-client/actions/workflows/ci.yml)
 [![PyPI version](https://img.shields.io/pypi/v/open-meteo-client.svg)](https://pypi.org/project/open-meteo-client/)
 [![Python versions](https://img.shields.io/pypi/pyversions/open-meteo-client.svg)](https://pypi.org/project/open-meteo-client/)
+[![Downloads](https://static.pepy.tech/badge/open-meteo-client/month)](https://pepy.tech/project/open-meteo-client)
 [![License: Apache 2.0](https://img.shields.io/pypi/l/open-meteo-client.svg)](https://github.com/jakobheine/open-meteo-client/blob/main/LICENSE)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
