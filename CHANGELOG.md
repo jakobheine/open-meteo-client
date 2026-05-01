@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.6] - 2026-05-01
+
 ### Added
 - **Agent SOP for doc freshness** (`agents/sops/docs-freshness.md`) —
   prescriptive procedure that AI agents (or humans) follow before every
@@ -137,7 +139,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `ci.yml` — lint/format/types + pytest matrix on Python 3.11–3.14
   - `publish.yml` — build and upload to PyPI via Trusted Publishing
 
-[Unreleased]: https://github.com/jakobheine/open-meteo-client/compare/v0.0.5...HEAD
+[Unreleased]: https://github.com/jakobheine/open-meteo-client/compare/v0.0.6...HEAD
+[0.0.6]: https://github.com/jakobheine/open-meteo-client/releases/tag/v0.0.6
 [0.0.5]: https://github.com/jakobheine/open-meteo-client/releases/tag/v0.0.5
 [0.0.4]: https://github.com/jakobheine/open-meteo-client/releases/tag/v0.0.4
 [0.0.3]: https://github.com/jakobheine/open-meteo-client/releases/tag/v0.0.3
