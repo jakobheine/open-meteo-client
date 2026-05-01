@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- CodeRabbit configured opt-in via `.coderabbit.yaml` (trigger with
+  `@coderabbitai review` comment) to respect free-tier rate limits.
+
 ### Added
 - Codecov integration (`.codecov.yml`, workflow upload, README badge) with
   a 95% coverage target enforced on both project and patch coverage.

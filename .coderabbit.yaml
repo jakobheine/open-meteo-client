@@ -1,0 +1,37 @@
+# CodeRabbit configuration
+# Docs: https://docs.coderabbit.ai/reference/configuration
+#
+# Policy: CodeRabbit is rate-limited to 1 review/hour on the free tier.
+# We keep it opt-in so reviews are saved for meaningful PRs instead of
+# being burned on trivial docs or infra tweaks.
+#
+# To trigger a review on a specific PR, comment on it:
+#   @coderabbitai review      — review since last review
+#   @coderabbitai full review  — review from scratch
+#
+# Also supports pausing, resolving, resummarizing, etc. — see docs.
+
+language: "en"
+early_access: false
+
+reviews:
+  # Don't auto-review every new PR.
+  auto_review:
+    enabled: false
+    drafts: false
+
+  # Still generate PR summaries (cheap, doesn't count against review limit)
+  high_level_summary: true
+  poem: true
+
+  # Request-changes only when genuinely needed, not on style nits
+  request_changes_workflow: true
+
+  # Skip trivial PRs even when triggered manually (too small to review)
+  review_status: true
+
+  # Post a poem + walkthrough on the PR for context
+  profile: "assertive"
+
+chat:
+  auto_reply: true

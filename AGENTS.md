@@ -232,6 +232,15 @@ gh release create vX.Y.Z --generate-notes --title "vX.Y.Z"
 - **Public API surface:** `src/openmeteo/__init__.py` (currently just exposes
   `__version__`; will re-export the intended public API once it exists)
 
+## Code review
+
+- **CodeRabbit** is installed but **opt-in** to respect free-tier rate limits
+  (1 review per hour). To request a review, comment on the PR:
+  - `@coderabbitai review` — review changes since last review
+  - `@coderabbitai full review` — review from scratch
+- Use it on meaningful code PRs, not docs/infra tweaks where ruff + mypy
+  already cover the ground.
+
 ## When unsure
 
 Stop and ask. Small, focused PRs with questions are better than large PRs
