@@ -8,7 +8,7 @@ imports and runs.
 Track progress at https://github.com/jakobheine/open-meteo-client.
 """
 
-__version__ = "0.0.4"
+__version__ = "0.0.5"
 
 from openmeteo.application.health import ping
 
