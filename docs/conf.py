@@ -84,3 +84,13 @@ html_theme_options = {
     "navigation_depth": 3,
     "includehidden": True,
 }
+
+# Extra links in the sidebar (rendered below the TOC)
+# Format: {label: URL}
+html_context = {
+    "display_github": True,
+    "github_user": "jakobheine",
+    "github_repo": "open-meteo-client",
+    "github_version": "main",
+    "conf_py_path": "/docs/",
+}

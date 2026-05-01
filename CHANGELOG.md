@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Cross-site nav: a top-of-page link row in both `README.md` (GitHub) and
+  `docs/index.md` (RTD), plus Sphinx's "Edit on GitHub" link on every
+  docs page. PyPI already surfaces GitHub + Docs via `project.urls`.
+
 ## [0.0.5] - 2026-05-01
 
 ### Added
