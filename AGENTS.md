@@ -209,15 +209,17 @@ sense?"* If yes, it's probably domain. If no, it's infrastructure.
 
 ```bash
 # 1. Bump version in src/openmeteo/__init__.py
-# 2. Bump matching assertion in tests/test_smoke.py
-# 3. Move CHANGELOG [Unreleased] entries into a dated [X.Y.Z] section
-# 4. Commit + push via PR
-# 5. After merge to main:
+# 2. Move CHANGELOG [Unreleased] entries into a dated [X.Y.Z] section
+# 3. Commit + push via PR
+# 4. After merge to main:
 git tag vX.Y.Z
 git push --tags
 gh release create vX.Y.Z --generate-notes --title "vX.Y.Z"
-# 6. The publish workflow triggers and waits for manual approval in the
-#    'pypi' GitHub Environment. A human must click "Approve and deploy".
+# 5. The publish workflow triggers and runs three jobs in order:
+#    build → live-check → publish (with 'pypi' environment approval).
+#    If live-check fails (real API broken or our code broken against it),
+#    publish never runs. Fix it, re-trigger the release.
+#    A human must click "Approve and deploy" before the publish step.
 #    Do not bypass this approval gate.
 ```
 
