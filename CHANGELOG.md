@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Agent SOP for doc freshness** (`agents/sops/docs-freshness.md`) —
+  prescriptive procedure that AI agents (or humans) follow before every
+  code-touching commit to keep README, Sphinx docs, CHANGELOG, and
+  project-metadata in sync with reality. Never touches auto-generated
+  files.
+- `just docs-check` recipe — prints the SOP pointer and the current
+  diff as a pre-commit reminder.
+- AGENTS.md + CONTRIBUTING.md updated to require the SOP before
+  relevant commits.
 - Cross-site nav: a top-of-page link row in both `README.md` (GitHub) and
   `docs/index.md` (RTD), plus Sphinx's "Edit on GitHub" link on every
   docs page. PyPI already surfaces GitHub + Docs via `project.urls`.

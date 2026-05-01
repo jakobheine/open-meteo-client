@@ -118,6 +118,35 @@ check-generated:
     fi
     echo "✅ Generated files are up to date"
 
+# ---------- Agent SOPs ----------
+
+# Print the docs-freshness SOP and remind the user to run it via their agent.
+# Humans: read the SOP and follow it manually.
+# Agents: you must read and follow the SOP before proposing the next commit.
+docs-check:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    echo "============================================================"
+    echo "  docs-freshness SOP — required before commits that touch"
+    echo "  code, metadata, tooling, or user-visible behavior."
+    echo ""
+    echo "  Full procedure: agents/sops/docs-freshness.md"
+    echo "============================================================"
+    echo ""
+    echo "If you're running this as a human, open the SOP, read it,"
+    echo "and apply it to the current diff. Propose doc updates as"
+    echo "part of the same PR as your code changes."
+    echo ""
+    echo "If you're an AI agent, you MUST follow the SOP before"
+    echo "proposing the next commit. Read the file now."
+    echo ""
+    # Show the current diff against origin/main so it's trivially available
+    if git rev-parse --verify origin/main >/dev/null 2>&1; then
+        echo "=== Files changed vs origin/main ==="
+        git diff --name-status origin/main...HEAD
+        git diff --name-status
+    fi
+
 # ---------- Documentation ----------
 
 # Build the Sphinx docs into docs/_build/html.
