@@ -137,6 +137,9 @@ Please **sign off** your commits (`git commit -s`).
    is user-visible.
 4. **Open the PR** — keep it focused (one logical change per PR).
 5. CI will run on your PR — please make sure it passes.
+6. **(Optional) Request an AI review** by commenting `@coderabbitai review`
+   on the PR. CodeRabbit is opt-in to respect free-tier rate limits; use it
+   on non-trivial changes where a second pair of eyes helps.
 
 ## Reporting bugs
 
