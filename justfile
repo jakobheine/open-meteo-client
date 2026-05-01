@@ -29,18 +29,33 @@ lint:
 types:
     uv run mypy src/
 
-# Run tests on the current interpreter (uses .venv/ from `just install`)
+# Run tests on the current interpreter (uses .venv/ from `just install`).
+# Runs unit + integration only; live tests are excluded by the -m filter.
 test:
-    uv run pytest
+    uv run pytest -m "not live"
 
-# Run tests on all supported Python versions (3.11, 3.12, 3.13, 3.14)
+# Run just the unit tests (fastest; no mocks, no network)
+test-unit:
+    uv run pytest tests/unit
+
+# Run just the integration tests (mocked httpx)
+test-integration:
+    uv run pytest tests/integration
+
+# Run the live tests against the real Open-Meteo API. Excluded from the
+# default `just test`; used by the nightly workflow and before releases.
+test-live:
+    uv run pytest -m live tests/live
+
+# Run tests on all supported Python versions (3.11, 3.12, 3.13, 3.14).
+# Skips live tests; use `just test-live` separately.
 test-all:
     #!/usr/bin/env bash
     set -euo pipefail
     for v in 3.11 3.12 3.13 3.14; do
         echo ""
         echo "=== Python $v ==="
-        uv run --isolated --python $v --extra dev pytest
+        uv run --isolated --python $v --extra dev pytest -m "not live"
     done
 
 # Run the full pre-commit verification: format + lint + types + tests

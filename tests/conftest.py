@@ -25,6 +25,11 @@ def pytest_configure(config: pytest.Config) -> None:
         "feature is implemented. Passes turn into failures (strict xfail) "
         "to force removal of the marker once the code catches up.",
     )
+    config.addinivalue_line(
+        "markers",
+        "live: hits the real Open-Meteo API. Excluded from the default test "
+        "run; used by the nightly scheduled workflow and pre-release checks.",
+    )
 
 
 def pytest_collection_modifyitems(items: list[pytest.Item]) -> None:
