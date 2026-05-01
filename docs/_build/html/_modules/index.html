@@ -1,0 +1,149 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overview: module code &mdash; open-meteo-client 0.0.4</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8c5712d9"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            open-meteo-client
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/getting-started.html">Getting started</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/getting-started.html#install">Install</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/getting-started.html#verify-the-install">Verify the install</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/getting-started.html#preview-v0-1-0-your-first-forecast-in-five-lines">(Preview, v0.1.0) Your first forecast in five lines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/getting-started.html#whats-next">What’s next</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../how-to/index.html">How-to guides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../how-to/verify-installation.html">Verify <code class="docutils literal notranslate"><span class="pre">open-meteo-client</span></code> is installed</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../how-to/verify-installation.html#solution">Solution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/index.html#module-openmeteo"><code class="docutils literal notranslate"><span class="pre">openmeteo</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/index.html#openmeteo.ping"><code class="docutils literal notranslate"><span class="pre">ping()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../explanation/index.html">Explanation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../explanation/why-async.html">Why async-only</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../explanation/why-async.html#async-is-the-dominant-style-for-new-i-o-code-in-2026">Async is the dominant style for new I/O code in 2026</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanation/why-async.html#sync-is-easy-to-add-later-if-needed">Sync is easy to add later if needed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanation/why-async.html#sync-users-today-have-an-escape-hatch">Sync users today have an escape hatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanation/why-async.html#the-cost-of-shipping-both">The cost of shipping both</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanation/why-async.html#decision">Decision</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../explanation/why-two-dependencies.html">Why only two runtime dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../explanation/why-two-dependencies.html#the-shape-of-lightweight">The shape of “lightweight”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanation/why-two-dependencies.html#where-this-matters">Where this matters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanation/why-two-dependencies.html#where-it-doesnt">Where it doesn’t</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../explanation/architecture.html">Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../explanation/architecture.html#layers">Layers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanation/architecture.html#why-this-structure">Why this structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanation/architecture.html#anti-goals">Anti-goals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanation/architecture.html#code-generation">Code generation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">open-meteo-client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Overview: module code</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>All modules for which code is available</h1>
+<ul><li><a href="openmeteo/application/health.html">openmeteo.application.health</a></li>
+</ul>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Jakob Heine.
+      <span class="lastupdated">Last updated on 2026-05-01.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

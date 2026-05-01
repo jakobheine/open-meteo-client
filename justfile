@@ -117,3 +117,19 @@ check-generated:
         exit 1
     fi
     echo "✅ Generated files are up to date"
+
+# ---------- Documentation ----------
+
+# Build the Sphinx docs into docs/_build/html.
+docs-build:
+    uv run --extra docs sphinx-build -b html -W --keep-going docs docs/_build/html
+    @echo ""
+    @echo "✅ Docs built. Open docs/_build/html/index.html"
+
+# Live preview the docs at http://localhost:8000 (auto-rebuilds on save).
+docs-serve:
+    uv run --extra docs sphinx-autobuild docs docs/_build/html --open-browser
+
+# Remove the docs build output.
+docs-clean:
+    rm -rf docs/_build
