@@ -37,7 +37,13 @@ just install-pythons      # installs Python 3.11/3.12/3.13/3.14 via uv
 just format               # auto-format + auto-fix lint issues
 just check                # fast: format-check + lint + mypy + tests (on 3.14)
 just check-all            # full: same, plus tests on all Python versions
+just docs-check           # remind yourself to run the docs-freshness SOP
 ```
+
+Before committing changes that touch code, metadata, tooling, or
+user-visible behavior, follow the [docs-freshness SOP](agents/sops/docs-freshness.md).
+It tells you which docs may need updating and which files (like
+`src/openmeteo/_generated/**`) you must never touch by hand.
 
 ### Available recipes
 

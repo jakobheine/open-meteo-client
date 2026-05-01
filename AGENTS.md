@@ -83,6 +83,13 @@ Run `just` with no args for the full list.
 
 - **Always run `just check` before claiming a task is done.** Nothing ships
   without lint, types, and tests passing.
+- **Before every commit that touches code, metadata, tooling, or
+  user-visible behavior, follow the
+  [docs-freshness SOP](agents/sops/docs-freshness.md).** Read the SOP
+  fully and apply it to the current diff. Don't just skim — it has
+  MUST rules about what you can and can't modify (e.g., never touch
+  `_generated/**` by hand). Run `just docs-check` to see the SOP pointer
+  and current diff.
 - **Write the test first (TDD).** For any new public behavior, first add a
   test describing what it should do, marked `@pytest.mark.not_implemented("reason")`.
   Then implement until the test passes. Then remove the `not_implemented`
@@ -246,6 +253,21 @@ auto-generated from Open-Meteo's OpenAPI spec.
   `just regen-variables` locally, commit the diff, and push.
 - **Never edit `src/openmeteo/_generated/**/*.py` by hand.** Changes will
   be overwritten on the next regeneration and CI will catch it.
+
+## Agent SOPs
+
+The `agents/sops/` directory holds Standard Operating Procedures — short,
+prescriptive checklists that you (the agent) MUST follow in specific
+situations. Each SOP has YAML frontmatter declaring its trigger and scope.
+
+Current SOPs:
+
+- [`agents/sops/docs-freshness.md`](agents/sops/docs-freshness.md) —
+  run before every commit that touches code, metadata, tooling, or
+  user-visible behavior. Proposes doc updates; never applies them
+  without explicit user approval.
+
+`just docs-check` prints the SOP pointer and the current diff.
 
 ## Code review
 
