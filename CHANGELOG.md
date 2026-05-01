@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `AGENTS.md` — instructions for AI coding assistants working in the repo,
+  following the [agents.md convention](https://agents.md/). Codifies tooling,
+  conventions, release flow, and the two-dep + no-FlatBuffers policies so
+  agents don't need to re-derive them each session.
+
 ## [0.0.3] - 2026-04-30
 
 ### Added
