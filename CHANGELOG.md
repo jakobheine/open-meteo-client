@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **`openmeteo.ping()`** — a tiny sync smoke-test function that returns
+  `"open-meteo-client {version}: pong"`. Lets users verify the package
+  is installed before the real API lands.
+- **Documentation site** (Sphinx + `sphinx_rtd_theme` + `myst-parser` +
+  `sphinx-autodoc-typehints`), organized per the Diátaxis framework:
+  tutorial, how-to, reference (auto-generated from docstrings), and
+  explanation. First content written: getting started, installation
+  check how-to, and three explanations (async, two dependencies,
+  architecture).
+- **Read the Docs config** (`.readthedocs.yaml`) so pushes auto-build
+  and deploy to `open-meteo-client.readthedocs.io`.
+- `docs` optional dependency group (`sphinx`, `sphinx-rtd-theme`,
+  `myst-parser`, `sphinx-autodoc-typehints`, `sphinx-autobuild`).
+- `Documentation` URL in `pyproject.toml` project URLs so PyPI displays
+  a 📘 link in the project sidebar.
+- README docs badge, "Documentation" section linking all four Diátaxis
+  quadrants.
+- `just docs-build`, `just docs-serve`, `just docs-clean` recipes.
+- CI job `docs` that builds the Sphinx site with `-W` so broken
+  references break the build.
+
 ## [0.0.4] - 2026-05-01
 
 ### Added

@@ -44,9 +44,17 @@ dev = [
     "pyyaml>=6",
     "types-pyyaml>=6",
 ]
+docs = [
+    "sphinx>=7",
+    "sphinx-rtd-theme>=2",
+    "myst-parser>=3",
+    "sphinx-autodoc-typehints>=2",
+    "sphinx-autobuild>=2024",
+]
 
 [project.urls]
 Homepage = "https://github.com/jakobheine/open-meteo-client"
+Documentation = "https://open-meteo-client.readthedocs.io/"
 Repository = "https://github.com/jakobheine/open-meteo-client"
 Issues = "https://github.com/jakobheine/open-meteo-client/issues"
 "Author website" = "https://jakobheine.de/"
@@ -93,6 +101,10 @@ ignore = [
 "scripts/**/*.py" = [
     "T201",    # print() is fine in scripts
     "INP001",  # scripts don't need __init__.py
+]
+"docs/conf.py" = [
+    "INP001",  # sphinx config lives outside the package
+    "A001",    # intentionally shadow `copyright` (Sphinx requirement)
 ]
 
 [tool.ruff.lint.pydocstyle]

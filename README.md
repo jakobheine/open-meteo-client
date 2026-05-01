@@ -4,6 +4,7 @@
 [![codecov](https://codecov.io/gh/jakobheine/open-meteo-client/graph/badge.svg)](https://codecov.io/gh/jakobheine/open-meteo-client)
 [![PyPI version](https://img.shields.io/pypi/v/open-meteo-client.svg)](https://pypi.org/project/open-meteo-client/)
 [![Python versions](https://img.shields.io/pypi/pyversions/open-meteo-client.svg)](https://pypi.org/project/open-meteo-client/)
+[![Documentation](https://img.shields.io/readthedocs/open-meteo-client?label=docs)](https://open-meteo-client.readthedocs.io/)
 [![Downloads](https://static.pepy.tech/badge/open-meteo-client/month)](https://pepy.tech/project/open-meteo-client)
 [![License: Apache 2.0](https://img.shields.io/pypi/l/open-meteo-client.svg)](https://github.com/jakobheine/open-meteo-client/blob/main/LICENSE)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
@@ -35,6 +36,15 @@ pip install open-meteo-client
 ```
 
 > ⚠️ Package reserved — no functionality yet. Check back for v0.1.0.
+
+## Documentation
+
+Full docs live at **[open-meteo-client.readthedocs.io](https://open-meteo-client.readthedocs.io/)**:
+
+- [Tutorial](https://open-meteo-client.readthedocs.io/en/latest/tutorial/getting-started.html) — learn by example
+- [How-to guides](https://open-meteo-client.readthedocs.io/en/latest/how-to/) — solve specific problems
+- [Reference](https://open-meteo-client.readthedocs.io/en/latest/reference/) — the full public API
+- [Explanation](https://open-meteo-client.readthedocs.io/en/latest/explanation/) — the design "why"
 
 ## Roadmap
 
