@@ -4,7 +4,10 @@ name: Publish to PyPI
 # Flow:
 #   1. `git tag v0.1.0 && git push --tags`
 #   2. Go to GitHub → Releases → "Draft a new release" → select tag → Publish
-#   3. This workflow runs and uploads to PyPI via Trusted Publishing.
+#   3. Build artifacts → run live tests → manual approval → upload to PyPI.
+#
+# If the live tests fail, the approval gate never appears and publish never
+# runs. Fix the issue, re-trigger the release.
 on:
   release:
     types: [published]
@@ -36,9 +39,31 @@ jobs:
           name: dist
           path: dist/
 
+  live-check:
+    name: Live tests against real API
+    needs: build
+    runs-on: ubuntu-latest
+    # Release-time is stricter than the nightly canary: we only ship if the
+    # real API + our code are actually working right now. pytest-rerunfailures
+    # still retries twice to forgive a single network hiccup.
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          python-version: "3.14"
+
+      - name: Install project + dev dependencies
+        run: uv sync --all-extras
+
+      - name: Run live tests
+        run: uv run pytest -m live tests/live --reruns 2 --reruns-delay 3 -v
+
   publish:
     name: Publish to PyPI
-    needs: build
+    needs: [build, live-check]
     runs-on: ubuntu-latest
 
     # GitHub Environment — provides an approval gate (optional, recommended).

@@ -29,6 +29,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - `just test-live` now retries each test up to 2 times with a 3s delay
   to tolerate transient network hiccups.
+- **Release pipeline now runs live tests before publish.** The
+  `publish.yml` workflow is `build → live-check → publish`; if live
+  tests fail, the `pypi` approval gate never appears and nothing is
+  published. Forces "shippable now, against the real API" as a literal
+  release gate.
 - **Restructured test layout** into `tests/unit/` (pure, no mocks),
   `tests/integration/` (mocked httpx), and `tests/live/` (real API,
   marked `@pytest.mark.live`, excluded from default runs). Each has a
