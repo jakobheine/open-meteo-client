@@ -12,6 +12,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   following the [agents.md convention](https://agents.md/). Codifies tooling,
   conventions, release flow, and the two-dep + no-FlatBuffers policies so
   agents don't need to re-derive them each session.
+- **Domain-Driven Design package skeleton** under `src/openmeteo/` with
+  `domain/`, `application/`, and `infrastructure/` layers. Each module is
+  a docstring-only placeholder for now. Layering rules documented in
+  `AGENTS.md` and `CONTRIBUTING.md`.
+- **Test-Driven Development support**: custom `@pytest.mark.not_implemented("reason")`
+  marker (registered in `tests/conftest.py`) that translates to a strict
+  `xfail`. Red tests pass CI while unimplemented; once they pass for real,
+  CI fails with a prompt to remove the marker. Example in
+  `tests/test_weather_today.py`.
 
 ## [0.0.3] - 2026-04-30
 
