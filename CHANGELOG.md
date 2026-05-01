@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Monthly-downloads badge (pepy.tech) in the README.
 - Link to the public [Roadmap project board](https://github.com/users/jakobheine/projects/1)
   in the README.
 - `AGENTS.md` — instructions for AI coding assistants working in the repo,
