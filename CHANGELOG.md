@@ -7,79 +7,58 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
-- **Live canary workflow** (`.github/workflows/live.yml`) — runs live
-  tests daily at 06:00 UTC plus on manual trigger; opens a GitHub issue
-  (labeled `live-canary`, `bug`) if the scheduled run fails.
-- **Fixture** `tests/fixtures/today_dresden.json` — captured real
-  Open-Meteo response for Dresden, used by the integration test.
-- **Live test** `tests/live/test_live_weather_today.py` — calls the real
-  API, asserts exact values for stable fields (lat/lon/timezone),
-  structural existence for current-block fields, and sane ranges for
-  volatile values (temperature, humidity, wind). Marked
-  `@pytest.mark.live` and `@pytest.mark.not_implemented` until
-  `openmeteo.today()` exists.
-- **Integration test** (rewritten) — uses the fixture via `pytest-httpx`
-  and asserts exact parse output. Deterministic counterpart to the live
-  test.
-- Dev dependencies: `pytest-httpx`, `pytest-rerunfailures` (for
-  flaky-tolerant live tests).
-- Label `live-canary` for auto-filed issues from failed scheduled runs.
-
-### Changed
-- `just test-live` now retries each test up to 2 times with a 3s delay
-  to tolerate transient network hiccups.
-- **Release pipeline now runs live tests before publish.** The
-  `publish.yml` workflow is `build → live-check → publish`; if live
-  tests fail, the `pypi` approval gate never appears and nothing is
-  published. Forces "shippable now, against the real API" as a literal
-  release gate.
-- **Restructured test layout** into `tests/unit/` (pure, no mocks),
-  `tests/integration/` (mocked httpx), and `tests/live/` (real API,
-  marked `@pytest.mark.live`, excluded from default runs). Each has a
-  README explaining scope.
-- `just test` now excludes live tests via `-m "not live"`. Added
-  `just test-unit`, `just test-integration`, `just test-live` for
-  focused runs.
-- Dropped the trivial `test_import` (`assert openmeteo is not None` is
-  already proven by the test's own `import`). Version-check relaxed from
-  exact-string match to PEP 440-shape check, so release bumps don't
-  require test edits.
-- Registered the `live` pytest marker in `conftest.py`.
+## [0.0.4] - 2026-05-01
 
 ### Added
 - **`Variable` enum auto-generated from Open-Meteo's OpenAPI spec** via
   `just regen-variables`. 53 variables at time of generation. CI verifies
   the committed file is up to date (`generated` job).
-- `scripts/regen_variables.py` — the codegen script (stdlib + `httpx` +
-  `pyyaml`).
-- Runtime dependency on `httpx` (was previously planned, now needed for
-  codegen and imminent client code).
-- Dev dependencies: `pyyaml`, `types-pyyaml`.
-
-### Changed
-- CodeRabbit configured opt-in via `.coderabbit.yaml` (trigger with
-  `@coderabbitai review` comment) to respect free-tier rate limits.
-
-### Added
-- Codecov integration (`.codecov.yml`, workflow upload, README badge) with
-  a 95% coverage target enforced on both project and patch coverage.
+- `scripts/regen_variables.py` — the codegen script.
+- **Live canary workflow** (`.github/workflows/live.yml`) — runs live
+  tests daily at 06:00 UTC plus on manual trigger; opens a GitHub issue
+  (labeled `live-canary`, `bug`) if the scheduled run fails.
+- **Fixture** `tests/fixtures/today_dresden.json` — captured real
+  Open-Meteo response for Dresden, used by the integration test.
+- **Live test** `tests/live/test_live_weather_today.py` — hits the real
+  API, asserts exact values for stable fields (lat/lon/timezone),
+  structural existence for current-block fields, and sane ranges for
+  volatile values.
+- **Integration test** `tests/integration/test_weather_today.py` — uses
+  the fixture via `pytest-httpx` for deterministic exact-match asserts.
+- Codecov integration (`.codecov.yml`, OIDC upload, README badge) with
+  a 95% coverage target on both project and patch coverage.
 - Monthly-downloads badge (pepy.tech) in the README.
 - Link to the public [Roadmap project board](https://github.com/users/jakobheine/projects/1)
   in the README.
 - `AGENTS.md` — instructions for AI coding assistants working in the repo,
-  following the [agents.md convention](https://agents.md/). Codifies tooling,
-  conventions, release flow, and the two-dep + no-FlatBuffers policies so
-  agents don't need to re-derive them each session.
-- **Domain-Driven Design package skeleton** under `src/openmeteo/` with
-  `domain/`, `application/`, and `infrastructure/` layers. Each module is
-  a docstring-only placeholder for now. Layering rules documented in
-  `AGENTS.md` and `CONTRIBUTING.md`.
-- **Test-Driven Development support**: custom `@pytest.mark.not_implemented("reason")`
-  marker (registered in `tests/conftest.py`) that translates to a strict
-  `xfail`. Red tests pass CI while unimplemented; once they pass for real,
-  CI fails with a prompt to remove the marker. Example in
-  `tests/test_weather_today.py`.
+  following the [agents.md convention](https://agents.md/).
+- **Domain-Driven Design package skeleton** under `src/openmeteo/`
+  (`domain/`, `application/`, `infrastructure/`) — docstring-only
+  placeholders, layering rules documented.
+- **Test-Driven Development support**: custom
+  `@pytest.mark.not_implemented("reason")` marker translating to strict
+  `xfail` (auto-cleanup once the code catches up).
+- Runtime dependency on `httpx`.
+- Dev dependencies: `pytest-httpx`, `pytest-rerunfailures`, `pyyaml`,
+  `types-pyyaml`.
+- Repo labels: `dependencies`, `ci`, `python`, `idea`, `design`,
+  `v0.1.0`, `v0.2.0`, `live-canary`, `documentation`.
+
+### Changed
+- **Release pipeline now runs live tests before publish.** The
+  `publish.yml` workflow is `build → live-check → publish`; if live
+  tests fail, the `pypi` approval gate never appears and nothing is
+  published.
+- **Restructured test layout** into `tests/unit/`, `tests/integration/`,
+  and `tests/live/` (with a README per tier). `just test` excludes live
+  tests; new recipes `test-unit`, `test-integration`, `test-live`.
+- `just test-live` retries each test up to 2 times with a 3s delay to
+  tolerate transient network hiccups.
+- Dropped the trivial `test_import`; version-check relaxed from
+  exact-string match to PEP 440-shape check.
+- CodeRabbit configured opt-in via `.coderabbit.yaml` (trigger with
+  `@coderabbitai review` comment) to respect free-tier rate limits.
+- Registered the `live` pytest marker in `conftest.py`.
 
 ## [0.0.3] - 2026-04-30
 
@@ -124,7 +103,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `ci.yml` — lint/format/types + pytest matrix on Python 3.11–3.14
   - `publish.yml` — build and upload to PyPI via Trusted Publishing
 
-[Unreleased]: https://github.com/jakobheine/open-meteo-client/compare/v0.0.3...HEAD
+[Unreleased]: https://github.com/jakobheine/open-meteo-client/compare/v0.0.4...HEAD
+[0.0.4]: https://github.com/jakobheine/open-meteo-client/releases/tag/v0.0.4
 [0.0.3]: https://github.com/jakobheine/open-meteo-client/releases/tag/v0.0.3
 [0.0.2]: https://github.com/jakobheine/open-meteo-client/releases/tag/v0.0.2
 [0.0.1]: https://github.com/jakobheine/open-meteo-client/releases/tag/v0.0.1
