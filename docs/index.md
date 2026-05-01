@@ -1,5 +1,12 @@
 # open-meteo-client
 
+**[📦 PyPI](https://pypi.org/project/open-meteo-client/)** ·
+**[🐙 GitHub](https://github.com/jakobheine/open-meteo-client)** ·
+**[💬 Discussions](https://github.com/jakobheine/open-meteo-client/discussions)** ·
+**[🗺️ Roadmap](https://github.com/users/jakobheine/projects/1)**
+
+---
+
 A lightweight, async Python client for the [Open-Meteo](https://open-meteo.com) weather API — with high-level helpers that fit on a sticky note.
 
 ```python
