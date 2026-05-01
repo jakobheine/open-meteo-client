@@ -28,7 +28,9 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Atmospheric Science",
     "Typing :: Typed",
 ]
-dependencies = []
+dependencies = [
+    "httpx>=0.27",
+]
 
 [project.optional-dependencies]
 dev = [
@@ -37,6 +39,8 @@ dev = [
     "pytest-cov>=5",
     "ruff>=0.6",
     "mypy>=1.11",
+    "pyyaml>=6",
+    "types-pyyaml>=6",
 ]
 
 [project.urls]
