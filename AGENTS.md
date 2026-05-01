@@ -27,14 +27,40 @@ low-level `Client` plus a `weather.today()` helper.
 
 ## Project layout
 
+The package follows a lightweight **Domain-Driven Design (DDD)** layering.
+Dependencies flow inward: infrastructure can import domain, but domain
+cannot import infrastructure.
+
 ```
-src/openmeteo/       # the package
-tests/               # pytest suite
-.github/workflows/   # CI and release pipelines
-pyproject.toml       # single source of truth for config
-justfile             # task recipes
-CHANGELOG.md         # Keep a Changelog format
+src/openmeteo/
+├── __init__.py              # re-exports public API
+├── _exceptions.py           # error taxonomy
+├── domain/                  # pure domain, no IO
+│   ├── location.py          # Location value object
+│   ├── forecast.py          # Forecast aggregate root
+│   ├── variable.py          # Variable enum
+│   └── units.py             # UnitSystem enum
+├── application/             # orchestration / use cases
+│   ├── client.py            # low-level Client class
+│   └── weather.py           # high-level weather.today() helpers
+└── infrastructure/          # external integrations
+    ├── http.py              # httpx wrapper, retries, timeouts
+    ├── geocoding.py         # string -> (lat, lon)
+    └── openmeteo_api.py     # JSON <-> domain parsing
+
+tests/                       # pytest suite
+├── conftest.py              # registers @pytest.mark.not_implemented
+├── test_smoke.py
+└── test_weather_today.py    # example TDD red test
 ```
+
+**Layering rules (enforced by review, not yet by tooling):**
+- `domain/` imports nothing from this package.
+- `application/` imports from `domain/` and `infrastructure/`.
+- `infrastructure/` imports from `domain/` only.
+- `__init__.py` re-exports from `application/`.
+
+Flatten if a module grows beyond one clear purpose.
 
 ## Commands
 
@@ -57,6 +83,13 @@ Run `just` with no args for the full list.
 
 - **Always run `just check` before claiming a task is done.** Nothing ships
   without lint, types, and tests passing.
+- **Write the test first (TDD).** For any new public behavior, first add a
+  test describing what it should do, marked `@pytest.mark.not_implemented("reason")`.
+  Then implement until the test passes. Then remove the `not_implemented`
+  marker. See "TDD workflow" below.
+- **Respect the DDD layering.** Domain is pure; infrastructure talks to
+  the outside world; application orchestrates. Never import infrastructure
+  from domain. See "Project layout" above.
 - **Write type annotations on all new code.** `mypy --strict` is enforced.
 - **Use Python 3.11 syntax only.** Ruff and mypy are pinned to `target-version = "py311"`.
   Do not use 3.12+ features like `class Container[T]:` (PEP 695 generics) or
@@ -90,6 +123,64 @@ Run `just` with no args for the full list.
   (OIDC); no API tokens should appear in workflows, env vars committed to
   the repo, or anywhere else.
 - **Do not weaken the ruff or mypy configs** without explicit discussion.
+
+## TDD workflow
+
+We practice strict red-green-refactor with automatic cleanup enforcement.
+
+### The ritual
+
+1. **Add a test** describing the new behavior, marked `@pytest.mark.not_implemented("reason")`.
+   The marker (defined in `tests/conftest.py`) translates to a strict xfail.
+   ```python
+   import pytest
+
+   @pytest.mark.not_implemented("weather.today() is not implemented yet")
+   def test_weather_today_returns_current_temperature() -> None:
+       from openmeteo.application import weather
+       result = weather.today("Dresden")
+       assert result.temperature is not None
+   ```
+2. **Run `just check`.** The test fails (as intended); pytest reports
+   `XFAIL` and CI stays green.
+3. **Implement the behavior** in the appropriate layer (usually domain +
+   application).
+4. **Run `just check` again.** The test now passes. With `strict=True`,
+   pytest reports it as `XPASS` and **fails the test run** with a message
+   like `[XPASS(strict)] weather.today() is not implemented yet`.
+5. **Remove the `@pytest.mark.not_implemented(...)` marker.** The test
+   should now run as a normal passing test. Commit.
+
+### Why this works
+
+- Writing the test first forces you to think about the API before the
+  implementation.
+- `strict=True` means the marker cannot silently rot — the moment the
+  test passes, CI forces you to remove the marker.
+- No CI is "red on purpose"; TDD red tests live as xfail, not failure.
+
+### When `not_implemented` is NOT appropriate
+
+- **Behavior that should never work** — use `pytest.raises(NotImplementedError)` or
+  a regular assertion. Don't mark passing-by-failing as xfail.
+- **External dependencies that may be down** — use `@pytest.mark.skipif(...)` instead.
+- **Flaky tests** — fix the flakiness; don't hide it behind a marker.
+
+## DDD layering rules
+
+- **`domain/`** — pure. Value objects, aggregates, enums. Safe to use in
+  any context (sync, async, tests, notebooks). Imports no other layer of
+  this package.
+- **`application/`** — orchestration. `Client`, high-level helpers.
+  Depends on `domain/` and `infrastructure/`.
+- **`infrastructure/`** — IO. HTTP client, retries, JSON parsing, geocoding.
+  Depends on `domain/` only.
+- **Package root (`__init__.py`)** — re-exports the public API from
+  `application/` so users can write `from openmeteo import weather`
+  without knowing the internal structure.
+
+When in doubt, ask: *"If I removed the network, would this still make
+sense?"* If yes, it's probably domain. If no, it's infrastructure.
 
 ## Conventions
 
