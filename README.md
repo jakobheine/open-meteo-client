@@ -34,6 +34,11 @@ pip install open-meteo-client
 
 > ⚠️ Package reserved — no functionality yet. Check back for v0.1.0.
 
+## Roadmap
+
+Public roadmap and backlog live on the [**Roadmap project board**](https://github.com/users/jakobheine/projects/1).
+Pick anything from the Backlog column that's not claimed — see [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) for release notes.
