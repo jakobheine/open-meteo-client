@@ -44,8 +44,10 @@ test-integration:
 
 # Run the live tests against the real Open-Meteo API. Excluded from the
 # default `just test`; used by the nightly workflow and before releases.
+# Uses pytest-rerunfailures so a single transient network hiccup doesn't
+# fail the suite (retries each test up to 2 times).
 test-live:
-    uv run pytest -m live tests/live
+    uv run pytest -m live tests/live --reruns 2 --reruns-delay 3
 
 # Run tests on all supported Python versions (3.11, 3.12, 3.13, 3.14).
 # Skips live tests; use `just test-live` separately.
