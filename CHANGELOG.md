@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **Restructured test layout** into `tests/unit/` (pure, no mocks),
+  `tests/integration/` (mocked httpx), and `tests/live/` (real API,
+  marked `@pytest.mark.live`, excluded from default runs). Each has a
+  README explaining scope.
+- `just test` now excludes live tests via `-m "not live"`. Added
+  `just test-unit`, `just test-integration`, `just test-live` for
+  focused runs.
+- Dropped the trivial `test_import` (`assert openmeteo is not None` is
+  already proven by the test's own `import`). Version-check relaxed from
+  exact-string match to PEP 440-shape check, so release bumps don't
+  require test edits.
+- Registered the `live` pytest marker in `conftest.py`.
+
 ### Added
 - **`Variable` enum auto-generated from Open-Meteo's OpenAPI spec** via
   `just regen-variables`. 53 variables at time of generation. CI verifies
