@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Codecov integration (`.codecov.yml`, workflow upload, README badge) with
+  a 95% coverage target enforced on both project and patch coverage.
 - Monthly-downloads badge (pepy.tech) in the README.
 - Link to the public [Roadmap project board](https://github.com/users/jakobheine/projects/1)
   in the README.

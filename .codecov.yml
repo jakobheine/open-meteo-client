@@ -1,0 +1,36 @@
+# Codecov configuration
+# Docs: https://docs.codecov.com/docs/codecov-yaml
+
+coverage:
+  # Round displayed percentages to 2 decimals
+  round: down
+  precision: 2
+  range: "90...100"
+
+  status:
+    # Overall project coverage — must stay at or above target
+    project:
+      default:
+        target: 95%
+        # Allow small natural fluctuations; fail PRs that drop coverage meaningfully
+        threshold: 0.5%
+        # Ignore any changes that would only occur in the informational branch
+        if_ci_failed: error
+
+    # Coverage of lines changed in the patch — new code must be well tested
+    patch:
+      default:
+        target: 95%
+        threshold: 0.5%
+        if_ci_failed: error
+
+# Include PR comments with coverage delta + list of uncovered lines
+comment:
+  layout: "reach, diff, flags, files"
+  behavior: default
+  require_changes: false
+
+# Don't measure coverage of tests themselves
+ignore:
+  - "tests/"
+  - "scripts/"

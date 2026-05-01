@@ -1,6 +1,7 @@
 # open-meteo-client
 
 [![CI](https://github.com/jakobheine/open-meteo-client/actions/workflows/ci.yml/badge.svg)](https://github.com/jakobheine/open-meteo-client/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/jakobheine/open-meteo-client/graph/badge.svg)](https://codecov.io/gh/jakobheine/open-meteo-client)
 [![PyPI version](https://img.shields.io/pypi/v/open-meteo-client.svg)](https://pypi.org/project/open-meteo-client/)
 [![Python versions](https://img.shields.io/pypi/pyversions/open-meteo-client.svg)](https://pypi.org/project/open-meteo-client/)
 [![Downloads](https://static.pepy.tech/badge/open-meteo-client/month)](https://pepy.tech/project/open-meteo-client)
