@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **`Variable` enum auto-generated from Open-Meteo's OpenAPI spec** via
+  `just regen-variables`. 53 variables at time of generation. CI verifies
+  the committed file is up to date (`generated` job).
+- `scripts/regen_variables.py` — the codegen script (stdlib + `httpx` +
+  `pyyaml`).
+- Runtime dependency on `httpx` (was previously planned, now needed for
+  codegen and imminent client code).
+- Dev dependencies: `pyyaml`, `types-pyyaml`.
+
 ### Changed
 - CodeRabbit configured opt-in via `.coderabbit.yaml` (trigger with
   `@coderabbitai review` comment) to respect free-tier rate limits.

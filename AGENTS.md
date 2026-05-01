@@ -232,6 +232,19 @@ gh release create vX.Y.Z --generate-notes --title "vX.Y.Z"
 - **Public API surface:** `src/openmeteo/__init__.py` (currently just exposes
   `__version__`; will re-export the intended public API once it exists)
 
+## Code generation
+
+The `Variable` enum in `src/openmeteo/_generated/variables.py` is
+auto-generated from Open-Meteo's OpenAPI spec.
+
+- **Regenerate locally:** `just regen-variables` — fetches the latest
+  upstream spec and rewrites the file.
+- **CI check:** the `generated` job re-runs the generator and fails if
+  the committed file differs. If CI fails on this job, run
+  `just regen-variables` locally, commit the diff, and push.
+- **Never edit `src/openmeteo/_generated/**/*.py` by hand.** Changes will
+  be overwritten on the next regeneration and CI will catch it.
+
 ## Code review
 
 - **CodeRabbit** is installed but **opt-in** to respect free-tier rate limits

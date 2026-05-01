@@ -80,3 +80,23 @@ install:
 # Install Python versions needed for test-all
 install-pythons:
     uv python install 3.11 3.12 3.13 3.14
+
+# ---------- Codegen ----------
+
+# Regenerate src/openmeteo/_generated/variables.py from Open-Meteo's OpenAPI spec.
+# Run this when the upstream spec changes and commit the result.
+regen-variables:
+    uv run python scripts/regen_variables.py
+
+# Verify that the committed _generated files match what regeneration would produce.
+# Used by CI; fails if someone edited a generated file by hand or forgot to regen.
+check-generated:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    uv run python scripts/regen_variables.py
+    if ! git diff --exit-code src/openmeteo/_generated/; then
+        echo ""
+        echo "❌ Generated files are out of date. Run 'just regen-variables' and commit."
+        exit 1
+    fi
+    echo "✅ Generated files are up to date"
