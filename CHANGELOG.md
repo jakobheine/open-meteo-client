@@ -7,7 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Live canary workflow** (`.github/workflows/live.yml`) — runs live
+  tests daily at 06:00 UTC plus on manual trigger; opens a GitHub issue
+  (labeled `live-canary`, `bug`) if the scheduled run fails.
+- **Fixture** `tests/fixtures/today_dresden.json` — captured real
+  Open-Meteo response for Dresden, used by the integration test.
+- **Live test** `tests/live/test_live_weather_today.py` — calls the real
+  API, asserts exact values for stable fields (lat/lon/timezone),
+  structural existence for current-block fields, and sane ranges for
+  volatile values (temperature, humidity, wind). Marked
+  `@pytest.mark.live` and `@pytest.mark.not_implemented` until
+  `openmeteo.today()` exists.
+- **Integration test** (rewritten) — uses the fixture via `pytest-httpx`
+  and asserts exact parse output. Deterministic counterpart to the live
+  test.
+- Dev dependencies: `pytest-httpx`, `pytest-rerunfailures` (for
+  flaky-tolerant live tests).
+- Label `live-canary` for auto-filed issues from failed scheduled runs.
+
 ### Changed
+- `just test-live` now retries each test up to 2 times with a 3s delay
+  to tolerate transient network hiccups.
 - **Restructured test layout** into `tests/unit/` (pure, no mocks),
   `tests/integration/` (mocked httpx), and `tests/live/` (real API,
   marked `@pytest.mark.live`, excluded from default runs). Each has a

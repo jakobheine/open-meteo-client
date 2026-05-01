@@ -1,0 +1,74 @@
+name: Live canary
+
+# Runs the live-tier tests against the real Open-Meteo API.
+# Triggered:
+#   - Daily at 06:00 UTC (catches upstream API drift overnight)
+#   - Manually via the Actions tab (workflow_dispatch)
+#   - Before a release: run manually, sanity-check, then tag
+#
+# Failures here DO NOT block PRs — they signal that Open-Meteo's API
+# changed or we have a real bug. A failure auto-opens a GitHub issue so
+# it's not missed.
+
+on:
+  schedule:
+    # 06:00 UTC = 08:00 Europe/Berlin summer, 07:00 Europe/Berlin winter
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  live:
+    name: Live tests
+    runs-on: ubuntu-latest
+    # Keep permissions minimal; no OIDC / secrets needed here.
+    permissions:
+      contents: read
+      issues: write  # for the failure notification
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          python-version: "3.14"
+
+      - name: Install project + dev dependencies
+        run: uv sync --all-extras
+
+      - name: Run live tests
+        run: uv run pytest -m live tests/live --reruns 2 --reruns-delay 3 -v
+
+      - name: Open an issue on failure
+        if: failure() && github.event_name == 'schedule'
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const title = `[live canary] failed on ${new Date().toISOString().slice(0, 10)}`;
+            const body = `The scheduled live canary failed. Likely causes:
+
+            - Open-Meteo's API changed (renamed fields, new required params, etc.)
+            - Network / transient outage (the workflow already retries twice)
+            - Real bug in our client
+
+            Check the logs: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            // Only open if no similar open issue exists
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'live-canary',
+            });
+            if (existing.data.length === 0) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['bug', 'live-canary'],
+              });
+            }

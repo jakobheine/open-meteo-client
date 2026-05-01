@@ -1,0 +1,27 @@
+{
+  "current": {
+    "interval": 900,
+    "precipitation": 0.0,
+    "relative_humidity_2m": 30,
+    "temperature_2m": 21.2,
+    "time": "2026-05-01T15:30",
+    "weather_code": 0,
+    "wind_speed_10m": 4.3
+  },
+  "current_units": {
+    "interval": "seconds",
+    "precipitation": "mm",
+    "relative_humidity_2m": "%",
+    "temperature_2m": "\u00b0C",
+    "time": "iso8601",
+    "weather_code": "wmo code",
+    "wind_speed_10m": "km/h"
+  },
+  "elevation": 117.0,
+  "generationtime_ms": 0.08690357208251953,
+  "latitude": 51.04,
+  "longitude": 13.74,
+  "timezone": "Europe/Berlin",
+  "timezone_abbreviation": "GMT+2",
+  "utc_offset_seconds": 7200
+}
