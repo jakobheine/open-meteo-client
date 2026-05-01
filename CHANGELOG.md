@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.5] - 2026-05-01
+
 ### Added
 - **`openmeteo.ping()`** — a tiny sync smoke-test function that returns
   `"open-meteo-client {version}: pong"`. Lets users verify the package
@@ -14,20 +16,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Documentation site** (Sphinx + `sphinx_rtd_theme` + `myst-parser` +
   `sphinx-autodoc-typehints`), organized per the Diátaxis framework:
   tutorial, how-to, reference (auto-generated from docstrings), and
-  explanation. First content written: getting started, installation
-  check how-to, and three explanations (async, two dependencies,
-  architecture).
-- **Read the Docs config** (`.readthedocs.yaml`) so pushes auto-build
-  and deploy to `open-meteo-client.readthedocs.io`.
-- `docs` optional dependency group (`sphinx`, `sphinx-rtd-theme`,
-  `myst-parser`, `sphinx-autodoc-typehints`, `sphinx-autobuild`).
-- `Documentation` URL in `pyproject.toml` project URLs so PyPI displays
-  a 📘 link in the project sidebar.
-- README docs badge, "Documentation" section linking all four Diátaxis
-  quadrants.
-- `just docs-build`, `just docs-serve`, `just docs-clean` recipes.
-- CI job `docs` that builds the Sphinx site with `-W` so broken
-  references break the build.
+  explanation. Hosted on Read the Docs at
+  [open-meteo-client.readthedocs.io](https://open-meteo-client.readthedocs.io/).
+- `docs` optional dependency group, `Documentation` URL in project URLs,
+  README docs badge + "Documentation" section, `just docs-build` /
+  `docs-serve` / `docs-clean` recipes, CI `docs` job.
+
+### Fixed
+- `.readthedocs.yaml` now uses the standard `python.install` block so
+  RTD's managed venv is populated correctly (initial config used custom
+  `uv` jobs that RTD didn't pick up for `sphinx-build`).
 
 ## [0.0.4] - 2026-05-01
 
@@ -125,7 +123,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `ci.yml` — lint/format/types + pytest matrix on Python 3.11–3.14
   - `publish.yml` — build and upload to PyPI via Trusted Publishing
 
-[Unreleased]: https://github.com/jakobheine/open-meteo-client/compare/v0.0.4...HEAD
+[Unreleased]: https://github.com/jakobheine/open-meteo-client/compare/v0.0.5...HEAD
+[0.0.5]: https://github.com/jakobheine/open-meteo-client/releases/tag/v0.0.5
 [0.0.4]: https://github.com/jakobheine/open-meteo-client/releases/tag/v0.0.4
 [0.0.3]: https://github.com/jakobheine/open-meteo-client/releases/tag/v0.0.3
 [0.0.2]: https://github.com/jakobheine/open-meteo-client/releases/tag/v0.0.2
