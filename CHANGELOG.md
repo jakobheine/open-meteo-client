@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Domain layer with v0.1.0 primitives**: `Location` (immutable value object), `UnitSystem` (StrEnum for METRIC/IMPERIAL), and `Forecast` (aggregate root) as foundational DDD-aligned building blocks for the upcoming Client and weather API.
+
 ## [0.0.6] - 2026-05-01
 
 ### Added

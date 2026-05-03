@@ -27,7 +27,7 @@ from openmeteo import weather
 await weather.today("Dresden")
 ```
 
-**Status:** 🚧 Planning — no code yet, just reserving the name and building the foundation. Track progress toward v0.1.0 in the [CHANGELOG](CHANGELOG.md).
+**Status:** 🚀 Pre-Alpha (v0.0.6) — foundational domain layer is live. The full v0.1.0 weather API lands next. Track progress in the [CHANGELOG](CHANGELOG.md).
 
 ## Planned features
 
@@ -42,7 +42,7 @@ await weather.today("Dresden")
 pip install open-meteo-client
 ```
 
-> ⚠️ Package reserved — no functionality yet. Check back for v0.1.0.
+> ℹ️ Foundation is live: `Location`, `UnitSystem`, `Forecast` domain primitives are available. The weather API lands in v0.1.0.
 
 ## Documentation
 

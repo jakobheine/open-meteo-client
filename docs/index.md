@@ -3,18 +3,15 @@
 A lightweight, async Python client for the [Open-Meteo](https://open-meteo.com) weather API — with high-level helpers that fit on a sticky note.
 
 ```python
-from openmeteo import ping
+from openmeteo import Location, UnitSystem, Forecast
 
-print(ping())
-# -> "open-meteo-client 0.0.4: pong"
+location = Location(latitude=51.3, longitude=12.4, name="Dresden")
 ```
 
-:::{admonition} Status: planning
-:class: warning
+:::{admonition} Status: pre-alpha
+:class: note
 
-This package is pre-alpha. The real weather API (`today`, `tomorrow`,
-`forecast`, `Client`, `Location`) lands in v0.1.0. Until then, [`ping()`](reference/index.md)
-exists so you can verify the package imports and runs.
+v0.0.6 ships domain layer building blocks: `Location`, `UnitSystem`, and `Forecast`. The full weather API (`Client`, `today()`, `forecast()`) lands in v0.1.0.
 
 Track progress on the [roadmap board](https://github.com/users/jakobheine/projects/1).
 :::
