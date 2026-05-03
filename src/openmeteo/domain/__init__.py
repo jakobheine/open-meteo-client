@@ -1,9 +1,8 @@
-"""Domain layer — pure domain types and logic.
+"""Domain layer public exports."""
 
-No IO, no network, no framework dependencies. The domain layer describes
-the weather domain in its own vocabulary: forecasts, locations, variables,
-units. It is safe to import from anywhere; it imports from nowhere else in
-this package.
+from openmeteo.domain.forecast import Forecast
+from openmeteo.domain.location import Location
+from openmeteo.domain.units import UnitSystem
+from openmeteo.domain.variable import Variable
 
-Aggregates and value objects live here.
-"""
+__all__ = ["Forecast", "Location", "UnitSystem", "Variable"]

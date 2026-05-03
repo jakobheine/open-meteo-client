@@ -1,6 +1,12 @@
-"""Unit systems: metric (default) and imperial.
+"""Unit system enum used by weather queries."""
 
-Planned: `UnitSystem` enum driving the `temperature_unit`, `wind_speed_unit`,
-and `precipitation_unit` parameters on requests. Metric is default; callers
-can override with `units="imperial"` on high-level helpers.
-"""
+from __future__ import annotations
+
+from enum import StrEnum
+
+
+class UnitSystem(StrEnum):
+    """Supported unit systems for weather data requests."""
+
+    METRIC = "metric"
+    IMPERIAL = "imperial"

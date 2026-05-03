@@ -1,15 +1,11 @@
-"""Lightweight async Python client for the Open-Meteo weather API.
-
-This package is a pre-alpha release. Real functionality (``today``,
-``tomorrow``, ``forecast``, ``Client``, ``Location``, ``Variable``) arrives
-in v0.1.0. Until then, :func:`ping` exists so you can verify the package
-imports and runs.
-
-Track progress at https://github.com/jakobheine/open-meteo-client.
-"""
+"""Lightweight async Python client for the Open-Meteo weather API."""
 
 __version__ = "0.0.6"
 
 from openmeteo.application.health import ping
+from openmeteo.domain import Forecast
+from openmeteo.domain import Location
+from openmeteo.domain import UnitSystem
+from openmeteo.domain import Variable
 
-__all__ = ["__version__", "ping"]
+__all__ = ["Forecast", "Location", "UnitSystem", "Variable", "__version__", "ping"]
