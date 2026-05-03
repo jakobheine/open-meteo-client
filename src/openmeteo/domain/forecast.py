@@ -2,17 +2,14 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import TYPE_CHECKING
+from datetime import datetime
 
-if TYPE_CHECKING:
-    from datetime import datetime
+from pydantic import BaseModel, ConfigDict
 
-    from openmeteo.domain.location import Location
+from openmeteo.domain.location import Location
 
 
-@dataclass(frozen=True, slots=True)
-class Forecast:
+class Forecast(BaseModel):
     """Forecast aggregate for a location over a time window.
 
     Attributes:
@@ -22,7 +19,9 @@ class Forecast:
         temperatures_c: Ordered temperature values in Celsius.
     """
 
+    model_config = ConfigDict(frozen=True)
+
     location: Location
     start: datetime
     end: datetime
-    temperatures_c: list[float]
+    temperatures_c: tuple[float, ...]

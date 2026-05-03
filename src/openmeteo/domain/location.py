@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from pydantic import BaseModel, ConfigDict
 
 
-@dataclass(frozen=True, slots=True)
-class Location:
+class Location(BaseModel):
     """Immutable location value object.
 
     Attributes:
@@ -14,6 +13,8 @@ class Location:
         longitude: Longitude in decimal degrees.
         name: Optional human-readable location name.
     """
+
+    model_config = ConfigDict(frozen=True)
 
     latitude: float
     longitude: float
