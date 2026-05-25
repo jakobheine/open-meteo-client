@@ -27,7 +27,6 @@ FIXTURE: dict[str, Any] = json.loads(FIXTURE_PATH.read_text())
 
 
 @pytest.mark.live
-@pytest.mark.not_implemented("openmeteo.today() is not implemented yet")
 async def test_live_today_in_dresden() -> None:
     """`openmeteo.today('Dresden')` returns a sensible current forecast."""
     import openmeteo  # noqa: PLC0415  (imported late so xfail bails cleanly)

@@ -10,22 +10,35 @@ revisit this test's expected values.
 """
 
 import json
+import re
 from pathlib import Path
 
-import pytest
 from pytest_httpx import HTTPXMock
 
 FIXTURE = Path(__file__).parent.parent / "fixtures" / "today_dresden.json"
 
 
-@pytest.mark.not_implemented("openmeteo.today() is not implemented yet")
 async def test_today_in_dresden_parses_fixture(httpx_mock: HTTPXMock) -> None:
     """Given Open-Meteo's real response for Dresden, parse it exactly."""
-    # Arrange: serve the fixture for any matching forecast request
     fixture_data = json.loads(FIXTURE.read_text())
     httpx_mock.add_response(
-        url="https://api.open-meteo.com/v1/forecast",
-        match_content=None,  # match regardless of query string for now
+        method="GET",
+        url=re.compile(r"https://geocoding-api\.open-meteo\.com/v1/search\?.*"),
+        json={
+            "results": [
+                {
+                    "name": "Dresden",
+                    "latitude": 51.05089,
+                    "longitude": 13.73832,
+                    "timezone": "Europe/Berlin",
+                    "country_code": "DE",
+                }
+            ],
+        },
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=re.compile(r"https://api\.open-meteo\.com/v1/forecast\?.*"),
         json=fixture_data,
     )
 
@@ -38,6 +51,7 @@ async def test_today_in_dresden_parses_fixture(httpx_mock: HTTPXMock) -> None:
     assert result.latitude == fixture_data["latitude"]
     assert result.longitude == fixture_data["longitude"]
     assert result.timezone == fixture_data["timezone"]
+    assert result.name == "Dresden"
 
     current = fixture_data["current"]
     assert result.current.temperature_2m == current["temperature_2m"]

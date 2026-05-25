@@ -1,6 +1,13 @@
-"""Unit systems: metric (default) and imperial.
+"""Unit systems supported by the Open-Meteo client."""
 
-Planned: `UnitSystem` enum driving the `temperature_unit`, `wind_speed_unit`,
-and `precipitation_unit` parameters on requests. Metric is default; callers
-can override with `units="imperial"` on high-level helpers.
-"""
+from enum import StrEnum
+
+
+class UnitSystem(StrEnum):
+    """Unit presets accepted by high-level weather helpers."""
+
+    METRIC = "metric"
+    IMPERIAL = "imperial"
+
+
+__all__ = ["UnitSystem"]

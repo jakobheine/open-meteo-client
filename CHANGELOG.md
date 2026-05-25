@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-05-25
+
+### Added
+- First working async weather API: `await weather.today("Dresden")` and
+  `await openmeteo.today("Dresden")` now return a real `Forecast`.
+- Public `OpenMeteoClient`, `Location`, `Forecast`, and `CurrentWeather` models,
+  with pydantic v2 validation and package-root re-exports.
+- Open-Meteo geocoding and forecast adapters using JSON over `httpx`.
+- Active live canary test for `today("Dresden")` against the real
+  Open-Meteo API.
+- Runtime dependency on `pydantic` v2, completing the intended two-dep
+  policy (`httpx` + `pydantic`).
+
+### Changed
+- Renamed the public low-level weather client to `OpenMeteoClient`.
+- Project status classifier moved from Planning to Alpha because the
+  documented v0.1.0 API now works.
+
 ## [0.0.6] - 2026-05-01
 
 ### Added
@@ -139,7 +157,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `ci.yml` — lint/format/types + pytest matrix on Python 3.11–3.14
   - `publish.yml` — build and upload to PyPI via Trusted Publishing
 
-[Unreleased]: https://github.com/jakobheine/open-meteo-client/compare/v0.0.6...HEAD
+[Unreleased]: https://github.com/jakobheine/open-meteo-client/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/jakobheine/open-meteo-client/compare/v0.0.6...v0.1.0
 [0.0.6]: https://github.com/jakobheine/open-meteo-client/releases/tag/v0.0.6
 [0.0.5]: https://github.com/jakobheine/open-meteo-client/releases/tag/v0.0.5
 [0.0.4]: https://github.com/jakobheine/open-meteo-client/releases/tag/v0.0.4
