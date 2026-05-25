@@ -2,15 +2,11 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
 from openmeteo._exceptions import ClientError, LocationNotFoundError
 from openmeteo.domain.location import Location
-
-if TYPE_CHECKING:
-    from openmeteo.infrastructure.http import HttpClient, JsonObject
+from openmeteo.infrastructure.http import HttpClient, JsonObject  # noqa: TC001
 
 GEOCODING_URL = "https://geocoding-api.open-meteo.com/v1/search"
 

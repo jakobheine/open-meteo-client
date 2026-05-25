@@ -2,13 +2,8 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
-from openmeteo.application.client import OpenMeteoClient
-
-if TYPE_CHECKING:
-    from openmeteo.application.client import LocationInput
-    from openmeteo.domain.forecast import Forecast
+from openmeteo.application.client import LocationInput, OpenMeteoClient
+from openmeteo.domain.forecast import Forecast  # noqa: TC001
 
 
 async def today(location: LocationInput) -> Forecast:

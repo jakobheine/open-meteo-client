@@ -2,14 +2,12 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Self, cast
+from types import TracebackType  # noqa: TC003
+from typing import Self, cast
 
 import httpx
 
 from openmeteo._exceptions import ClientError, RateLimitError, TransportError
-
-if TYPE_CHECKING:
-    from types import TracebackType
 
 DEFAULT_TIMEOUT_SECONDS = 10.0
 HTTP_CLIENT_ERROR_MIN = 400

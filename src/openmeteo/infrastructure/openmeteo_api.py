@@ -2,20 +2,16 @@
 
 from __future__ import annotations
 
+from collections.abc import Iterable  # noqa: TC003
 from datetime import datetime  # noqa: TC003
-from typing import TYPE_CHECKING
 
 from pydantic import BaseModel, ConfigDict, ValidationError
 
 from openmeteo._exceptions import ClientError
 from openmeteo.domain.forecast import CurrentWeather, Forecast
 from openmeteo.domain.location import Location
-
-if TYPE_CHECKING:
-    from collections.abc import Iterable
-
-    from openmeteo.domain.variable import Variable
-    from openmeteo.infrastructure.http import HttpClient, JsonObject, QueryParams
+from openmeteo.domain.variable import Variable  # noqa: TC001
+from openmeteo.infrastructure.http import HttpClient, JsonObject, QueryParams  # noqa: TC001
 
 FORECAST_URL = "https://api.open-meteo.com/v1/forecast"
 

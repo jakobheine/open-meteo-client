@@ -3,17 +3,14 @@
 from __future__ import annotations
 
 from collections.abc import Awaitable, Callable, Iterable
-from typing import TYPE_CHECKING, Self
+from types import TracebackType  # noqa: TC003
+from typing import Self
 
+from openmeteo.domain.forecast import Forecast  # noqa: TC001
 from openmeteo.domain.location import Location
 from openmeteo.domain.variable import Variable
 from openmeteo.infrastructure import geocoding, openmeteo_api
 from openmeteo.infrastructure.http import HttpClient
-
-if TYPE_CHECKING:
-    from types import TracebackType
-
-    from openmeteo.domain.forecast import Forecast
 
 COORDINATE_PAIR_LENGTH = 2
 
