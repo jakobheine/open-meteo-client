@@ -8,7 +8,7 @@ keep concerns separable without over-engineering.
 ```
 src/openmeteo/
 ├── domain/            pure domain types (Location, Forecast, Variable, UnitSystem)
-├── application/       orchestration (Client, weather helpers, ping)
+├── application/       orchestration (OpenMeteoClient, weather helpers, ping)
 ├── infrastructure/    external IO (httpx adapter, geocoding, response parsing)
 └── _generated/        code generated from Open-Meteo's OpenAPI spec
 ```

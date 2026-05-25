@@ -12,7 +12,7 @@ If you're a human, see [CONTRIBUTING.md](CONTRIBUTING.md) instead.
 convenience layer (`weather.today("Dresden")`).
 
 **Status:** Planning — no functional code yet. The v0.1.0 goal is a working
-low-level `Client` plus a `weather.today()` helper.
+low-level `OpenMeteoClient` plus a `weather.today()` helper.
 
 ## Tech stack
 
@@ -41,7 +41,7 @@ src/openmeteo/
 │   ├── variable.py          # Variable enum
 │   └── units.py             # UnitSystem enum
 ├── application/             # orchestration / use cases
-│   ├── client.py            # low-level Client class
+│   ├── client.py            # low-level OpenMeteoClient class
 │   └── weather.py           # high-level weather.today() helpers
 └── infrastructure/          # external integrations
     ├── http.py              # httpx wrapper, retries, timeouts
@@ -178,7 +178,7 @@ We practice strict red-green-refactor with automatic cleanup enforcement.
 - **`domain/`** — pure. Value objects, aggregates, enums. Safe to use in
   any context (sync, async, tests, notebooks). Imports no other layer of
   this package.
-- **`application/`** — orchestration. `Client`, high-level helpers.
+- **`application/`** — orchestration. `OpenMeteoClient`, high-level helpers.
   Depends on `domain/` and `infrastructure/`.
 - **`infrastructure/`** — IO. HTTP client, retries, JSON parsing, geocoding.
   Depends on `domain/` only.
