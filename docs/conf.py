@@ -57,6 +57,7 @@ autodoc_typehints_description_target = "documented"
 napoleon_google_docstring = True
 napoleon_numpy_docstring = False
 napoleon_include_init_with_doc = False
+napoleon_use_ivar = True
 napoleon_use_rtype = True
 
 # -- Intersphinx --------------------------------------------------------------
