@@ -13,7 +13,7 @@ print(ping())
 :class: warning
 
 This package is pre-alpha. The real weather API (`today`, `tomorrow`,
-`forecast`, `Client`, `Location`) lands in v0.1.0. Until then, [`ping()`](reference/index.md)
+`forecast`, `OpenMeteoClient`, `Location`) lands in v0.1.0. Until then, [`ping()`](reference/index.md)
 exists so you can verify the package imports and runs.
 
 Track progress on the [roadmap board](https://github.com/users/jakobheine/projects/1).

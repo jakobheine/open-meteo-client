@@ -5,7 +5,7 @@ via `pytest-httpx`. Verify that the pieces (domain + application +
 infrastructure) work together without touching the real network.
 
 **What belongs here:**
-- `Client.forecast()` with mocked responses
+- `OpenMeteoClient.forecast()` with mocked responses
 - `weather.today()`, `weather.tomorrow()` with mocked responses
 - Fixture-based tests using captured real JSON
 

@@ -1,7 +1,7 @@
-"""Application layer — use cases and orchestration.
+"""Application layer use cases and orchestration."""
 
-Coordinates the domain with infrastructure to fulfill user intents. The
-`Client` class (low-level) and the `weather` module (high-level helpers)
-live here. Depends on domain and infrastructure; is depended on by the
-package's public `__init__`.
-"""
+from openmeteo.application.client import OpenMeteoClient
+from openmeteo.application.health import ping
+from openmeteo.application.weather import today
+
+__all__ = ["OpenMeteoClient", "ping", "today"]

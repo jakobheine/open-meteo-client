@@ -15,7 +15,7 @@ authors = [
 ]
 keywords = ["weather", "open-meteo", "meteo", "forecast", "async", "client", "api"]
 classifiers = [
-    "Development Status :: 1 - Planning",
+    "Development Status :: 3 - Alpha",
     "Framework :: AsyncIO",
     "Intended Audience :: Developers",
     "Operating System :: OS Independent",
@@ -30,6 +30,7 @@ classifiers = [
 ]
 dependencies = [
     "httpx>=0.27",
+    "pydantic>=2",
 ]
 
 [project.optional-dependencies]

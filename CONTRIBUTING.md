@@ -70,7 +70,7 @@ The package is organized into three layers. Dependencies flow inward.
 - **`src/openmeteo/domain/`** — pure domain types (value objects, aggregates,
   enums). No IO. No framework dependencies.
 - **`src/openmeteo/application/`** — use cases that orchestrate the domain
-  with infrastructure. The `Client` class and `weather.today()` helpers live here.
+  with infrastructure. The `OpenMeteoClient` class and `weather.today()` helpers live here.
 - **`src/openmeteo/infrastructure/`** — HTTP, JSON parsing, retries, geocoding.
   Depends on domain but not on application.
 

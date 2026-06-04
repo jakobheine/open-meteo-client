@@ -15,3 +15,10 @@ def test_version_is_a_string() -> None:
     # crude PEP 440 check — three dot-separated segments, digits-ish
     parts = openmeteo.__version__.split(".")
     assert len(parts) >= 3, f"expected X.Y.Z, got {openmeteo.__version__!r}"
+
+
+def test_public_weather_api_is_exported() -> None:
+    assert openmeteo.today is openmeteo.weather.today
+    assert openmeteo.OpenMeteoClient.__name__ == "OpenMeteoClient"
+    assert openmeteo.Forecast.__name__ == "Forecast"
+    assert openmeteo.Location.__name__ == "Location"

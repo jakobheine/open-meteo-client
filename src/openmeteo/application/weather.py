@@ -1,10 +1,22 @@
-"""High-level convenience API.
+"""High-level convenience API for common weather use cases."""
 
-Planned helpers:
-    weather.today(location)       # current conditions by name or (lat, lon)
-    weather.tomorrow(location)    # tomorrow's summary
-    weather.forecast(location, days=7)
+from __future__ import annotations
 
-Sits on top of the `Client` class, handles geocoding, sensible defaults,
-and human-friendly return shapes.
-"""
+from openmeteo.application.client import LocationInput, OpenMeteoClient
+from openmeteo.domain.forecast import Forecast  # noqa: TC001
+
+
+async def today(location: LocationInput) -> Forecast:
+    """Return current weather for today at a location.
+
+    Args:
+        location: Place name, ``Location`` instance, or ``(latitude, longitude)`` tuple.
+
+    Returns:
+        A parsed domain ``Forecast`` with current weather conditions.
+    """
+    async with OpenMeteoClient() as client:
+        return await client.today(location)
+
+
+__all__ = ["today"]

@@ -34,7 +34,7 @@ await weather.today("Dresden")
 - **Lightweight** — two dependencies (`httpx`, `pydantic`), no FlatBuffers, no pandas
 - **Async-first** — built on `httpx.AsyncClient`
 - **Typed** — full pydantic v2 models, `StrEnum` for weather variables, IDE autocomplete
-- **Two layers** — high-level convenience API (`weather.today()`) on top of a full low-level `Client`
+- **Two layers** — high-level convenience API (`weather.today()`) on top of a full low-level `OpenMeteoClient`
 
 ## Install
 
