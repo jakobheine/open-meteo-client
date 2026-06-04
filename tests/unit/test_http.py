@@ -2,6 +2,7 @@
 
 import httpx
 import pytest
+from pytest_httpx import HTTPXMock
 
 from openmeteo._exceptions import ClientError, RateLimitError, TransportError
 from openmeteo.infrastructure.http import HttpClient
@@ -26,6 +27,23 @@ async def test_http_client_context_manages_owned_client() -> None:
 
     async with client:
         pass
+
+
+async def test_http_client_context_does_not_close_provided_client() -> None:
+    async with httpx.AsyncClient() as async_client:
+        async with HttpClient(client=async_client):
+            pass
+
+        assert not async_client.is_closed
+
+
+async def test_get_json_uses_ephemeral_client(httpx_mock: HTTPXMock) -> None:
+    url = "https://example.test/weather"
+    httpx_mock.add_response(url=url, json={"ok": True})
+
+    result = await HttpClient().get_json(url)
+
+    assert result == {"ok": True}
 
 
 async def test_get_json_rejects_non_object_payload() -> None:
@@ -58,6 +76,15 @@ async def test_get_json_raises_client_error_for_api_error_payload() -> None:
 async def test_get_json_maps_client_status() -> None:
     def handler(_request: httpx.Request) -> httpx.Response:
         return httpx.Response(400, text="bad request")
+
+    async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as async_client:
+        with pytest.raises(ClientError, match="HTTP 400"):
+            await HttpClient(client=async_client).get_json("https://example.test/weather")
+
+
+async def test_get_json_maps_status_with_empty_reason() -> None:
+    def handler(_request: httpx.Request) -> httpx.Response:
+        return httpx.Response(400, json={"reason": ""})
 
     async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as async_client:
         with pytest.raises(ClientError, match="HTTP 400"):
