@@ -45,7 +45,7 @@ jobs:
 
       - name: Open an issue on failure
         if: failure() && github.event_name == 'schedule'
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const title = `[live canary] failed on ${new Date().toISOString().slice(0, 10)}`;
